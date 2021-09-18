@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Route } from 'react-router';
 import LoginForm from './components/LoginForm';
 import RegForm from './components/RegForm';
 
@@ -33,7 +34,7 @@ function App() {
     //console.log(details);
     if(details.email === adminUser.email && details.password === adminUser.password){
       setUser({
-        name: details.name,     //TODO: This should be able to retrive name of registered user and display it. Also change hardcode on line 41 in span.
+        name: details.name,     //TODO: This should be able to retrive name of registered user and display it. Also change hardcode on line 56 in span.
         email: details.email
       });
     }else{
@@ -58,8 +59,8 @@ function App() {
           <button onClick={Logout}>Logout</button>
         </div>
       ): (
-        <RegForm Register={Register} error={error} />
-        //<LoginForm Login={Login} error={error} />
+        //<RegForm Register={Register} error={error} />
+        <LoginForm Login={Login} error={error} />
       )}
     </div>
   );
