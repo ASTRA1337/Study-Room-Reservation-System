@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import LoginForm from './LoginForm';
+import ky from 'ky-universal';
 
 function RegForm({Register,error}) {
     const [details, setDetails] = useState({fname:"", lname:"",email:"",password:""});
@@ -7,6 +8,7 @@ function RegForm({Register,error}) {
         r.preventDefault();
         Register(details);
     }
+    
     return (
         <form onSubmit={submitHandler}>
             <div className="form-inner">

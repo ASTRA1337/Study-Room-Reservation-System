@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Route } from 'react-router';
 import LoginForm from './components/LoginForm';
 import RegForm from './components/RegForm';
+import {authenticate} from './API';
 
 
 function App() {
@@ -30,17 +31,19 @@ function App() {
     }
   }
 
-  const Login = details => {
+  const Login = async (details) => {
     //console.log(details);
-    if(details.email === adminUser.email && details.password === adminUser.password){
+    const isAuthenticated = await authenticate(details);
+    if(isAuthenticated){
       setUser({
         name: details.name,     //TODO: This should be able to retrive name of registered user and display it. Also change hardcode on line 56 in span.
         email: details.email
       });
+      setError("Access granted!Navigate to dashboard");
     }else{
       console.log("Access Denied!");
       setError("Access Denied!");
-  };
+    };
   }
 
   const Logout = () => {
