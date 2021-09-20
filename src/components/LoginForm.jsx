@@ -1,13 +1,21 @@
 import React, {useState} from 'react'
+import ky from 'ky-universal';
 
 export default function LoginForm({Login, error}) {
     const [details, setDetails] = useState({email:"",password:""});
     const submitHandler = e => {
         e.preventDefault();
-
         Login(details);
     }
+    const API = "http://localhost:3003/";
 
+    console.log("running reg");
+    const parsed = async () => {
+        console.log("running parsed"); 
+        const test = await ky(API).json(); 
+        console.log(test)
+    };
+    parsed();
 
     return (
         <form onSubmit={submitHandler}>
