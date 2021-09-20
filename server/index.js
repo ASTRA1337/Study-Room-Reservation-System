@@ -3,6 +3,8 @@ const router = require("./routes");
 const app = express();
 const PORT = 3003;
 
+const connection = require("./server");
+
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
