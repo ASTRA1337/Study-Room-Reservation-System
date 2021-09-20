@@ -14,7 +14,7 @@ function App() {
 
   }
 
-  const [user, setUser] = useState({name:"",email:""});
+  const [user, setUser] = useState({name:"",email:"", uid: ""});
   const [error, setError] = useState("");
 
   const Register = details => {
@@ -33,16 +33,19 @@ function App() {
 
   const Login = async (details) => {
     //console.log(details);
-    const isAuthenticated = await authenticate(details);
-    if(isAuthenticated){
+    const res = await authenticate(details);
+    const {authenticated, error, userData} = res;
+    if(authenticated){
+      console.log("Your user data:", userData);
       setUser({
-        name: details.name,     //TODO: This should be able to retrive name of registered user and display it. Also change hardcode on line 56 in span.
-        email: details.email
+        name: userData.first_name,
+        email: userData.email,
+        uid: userData.user_id
       });
       setError("Access granted!Navigate to dashboard");
     }else{
-      console.log("Access Denied!");
-      setError("Access Denied!");
+      console.log("Access Denied!", error);
+      setError("Access Denied!" + error);
     };
   }
 
@@ -50,14 +53,12 @@ function App() {
     setUser({name:"",email:""});
   }
 
-
-
   return (
     <div className="App">
       {(user.email != "") ? (
         <div className="welcome">
           <h2>
-            Welcome, <span>{adminUser.name}</span>  
+            Welcome, <span>{user.name}</span>  
           </h2>
           <button onClick={Logout}>Logout</button>
         </div>

@@ -12,7 +12,7 @@ var config = {
     host: 'yourhostaddress',  //ex: localhost, 127.0.0.1
     user: 'yourusername', //update me
     password: 'yourpassword',  //update me
-    database: 'yourdatabase',
+    database: 'yourdatabase', // update me
     port: 3306,
 };
 connection = mysql.createConnection(config);

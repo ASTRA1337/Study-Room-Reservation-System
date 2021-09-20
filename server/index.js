@@ -3,7 +3,7 @@ const router = require("./routes");
 const app = express();
 const PORT = 3003;
 
-const connection = require("./server");
+const connection = require("./server_database");
 
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');

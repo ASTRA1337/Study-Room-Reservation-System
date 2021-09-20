@@ -15,9 +15,9 @@ async function authenticate(user){
             {json: user}
         ).json();
         console.log(res);
-        return res.authenticated;
+        return {authenticated: res.authenticated, error: res.error ,userData: res.user};
     } catch (error) {
-        return false;
+        return {authenticated: false, error: error};
     };
 };
 export {authenticate};
