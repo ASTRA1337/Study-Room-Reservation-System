@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const user = require("./user");
-router.use("", [user]);
+const authenticate = require("./authenticate");
+router.use("", [user,authenticate]);
 
 router.get("/", (req, res) => {
     res.json({

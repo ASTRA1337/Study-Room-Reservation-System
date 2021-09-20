@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-router.post("/user/authenticate", (req, res) => {
+router.post("/user/schedule", (req, res) => {
     console.log(req.body)
     res.json({
         "authenticated": true,
