@@ -59,8 +59,8 @@ function App() {
           <button onClick={Logout}>Logout</button>
         </div>
       ): (
-        //<RegForm Register={Register} error={error} />
-        <LoginForm Login={Login} error={error} />
+        <RegForm Register={Register} error={error} />
+        //<LoginForm Login={Login} error={error} />
       )}
     </div>
   );
