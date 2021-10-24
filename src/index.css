@@ -129,4 +129,19 @@ form .form-inner  input[type="submit"]:hover, .welcome button:hover{
     font-weight: 700;
 }
 
+.hello{
+    width: 100%;
+    max-width: 480px;
+    background-color: #e9ecf7;
+    padding: 15px 30px;
+
+}
+
+.hello h2{
+    color: #2b3b6a;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+
+}
 

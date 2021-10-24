@@ -9,7 +9,7 @@ In mysql, ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY
 const mysql = require('mysql2');
 
 var config = {
-    host: 'yourhostaddress',  //ex: localhost, 127.0.0.1
+    host: 'yourhostname',  //ex: localhost, 127.0.0.1
     user: 'yourusername', //update me
     password: 'yourpassword',  //update me
     database: 'yourdatabase', // update me
