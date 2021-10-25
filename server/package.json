@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "ky": "^0.28.6",
+    "ky-universal": "^0.9.1",
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.12"
   }

@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 import LoginForm from './components/LoginForm';
 import RegForm from './components/RegForm';
 import {authenticate} from './API';
+import Welcome from './components/Welcome';
 
 
 function App() {
@@ -64,7 +65,8 @@ function App() {
         </div>
       ): (
         //<RegForm Register={Register} error={error} />
-        <LoginForm Login={Login} error={error} />
+       // <LoginForm Login={Login} error={error} />
+        <Welcome  Welcome={Welcome}  error={error} />
       )}
     </div>
   );
