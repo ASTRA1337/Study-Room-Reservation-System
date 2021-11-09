@@ -10,7 +10,9 @@ function Welcome() {
     
     return (
         <div className = "welcomepage">
-           welcome !!!
+         <div className = "secOne"></div>
+         <div className = "secTwo"><LoginForm/></div>
+         <div className = "secThree"></div>
         </div>
         
     )

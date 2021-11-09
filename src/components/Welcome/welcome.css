@@ -1,8 +1,18 @@
 .welcomepage{
-    display: flex;
-    flex-direction: row;
-    background-color: chocolate;
-   
+   display: flex;
+   flex-direction: row;
+    
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+
+.secTwo{
+    flex-basis: 0%;
+    
 }
 
 
