@@ -1,0 +1,34 @@
+.topbar{
+    width: 100%;
+    height: 50px;
+    background-color: #e9ecf7;
+}
+
+.topbarWrapper{
+    height: 100%;
+    padding: 0px 20px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    font-weight: bold;
+    font-size: 30px;
+    color: #2b3b6a;
+    text-shadow: 0 0 3px #a62540;
+}
+
+.topright{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbarIconContainer{
+    position: relative;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #bbbbbb;
+    
+}
