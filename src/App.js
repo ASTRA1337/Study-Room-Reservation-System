@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, Fragment} from 'react';
 import { Route } from 'react-router';
 import LoginForm from './components/LoginForm';
 import RegForm from './components/RegForm';
-import {authenticate} from './API';
-import Welcome from './components/Welcome';
-
+import {authenticate, createUser} from './API';
+import Welcome from './components/Welcome/Welcome';
+import Topbar from './components/Topbar/Topbar';
 
 function App() {
 
@@ -54,22 +54,30 @@ function App() {
     setUser({name:"",email:""});
   }
 
-  return (
-    <div className="App">
-      {(user.email != "") ? (
+  if (user.email != "") { //Login user
+    return (
+      <Fragment>
+        <Topbar />
+      
+      <div className="App">
+     
         <div className="welcome">
           <h2>
             Welcome, <span>{user.name}</span>  
           </h2>
           <button onClick={Logout}>Logout</button>
         </div>
-      ): (
-        //<RegForm Register={Register} error={error} />
-       // <LoginForm Login={Login} error={error} />
-        <Welcome  Welcome={Welcome}  error={error} />
-      )}
-    </div>
-  );
+      </div>
+      </Fragment>
+    );
+  } else { // Non-login user
+    return (
+      <Fragment>
+        <div></div>
+        <Welcome Login={Login} clearError={setError} error={error} Register={Register}/>
+      </Fragment>
+    )
+  }
 }
 
 export default App;

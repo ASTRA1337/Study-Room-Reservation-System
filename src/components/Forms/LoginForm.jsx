@@ -4,7 +4,7 @@ import ky from 'ky-universal';
 
 
 
-export default function LoginForm({Login, error}) {
+export default function LoginForm({Login, error, toggleRegister}) {
     const [details, setDetails] = useState({email:"",password:""});
     const submitHandler = e => {
         e.preventDefault();
@@ -35,7 +35,7 @@ export default function LoginForm({Login, error}) {
                     <input type="text" name="password" id="password" onChange={e => setDetails({...details,password: e.target.value})} value = {details.password} />
                 </div>
                 <input type="submit" value="Log In"></input>
-                <input type="submit" value="Create Account"></input>
+                <input type="submit" value="Create Account" onClick={(e) =>{e.preventDefault(); toggleRegister()}}></input>
 
             </div>
         </form>
