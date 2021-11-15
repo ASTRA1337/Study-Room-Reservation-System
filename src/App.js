@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import { Route } from 'react-router';
-import LoginForm from './components/LoginForm';
-import RegForm from './components/RegForm';
+import LoginForm from './components/Forms/LoginForm';
+import RegForm from './components/Forms/RegForm';
+import Topbar from './components/Topbar/Topbar';
 import {authenticate} from './API';
-import Welcome from './components/Welcome';
+import Welcome from './components/Welcome/Welcome';
 
 
 function App() {
@@ -57,16 +58,20 @@ function App() {
   return (
     <div className="App">
       {(user.email != "") ? (
-        <div className="welcome">
+        {/* <div className="welcome">
           <h2>
             Welcome, <span>{user.name}</span>  
           </h2>
           <button onClick={Logout}>Logout</button>
-        </div>
+        </div> */}
       ): (
         //<RegForm Register={Register} error={error} />
-       // <LoginForm Login={Login} error={error} />
-        <Welcome  Welcome={Welcome}  error={error} />
+        //<LoginForm Login={Login} error={error} />
+        <Welcome  />
+        //<Topbar />
+        
+        
+        
       )}
     </div>
   );
