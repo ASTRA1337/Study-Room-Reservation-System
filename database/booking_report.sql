@@ -4,7 +4,8 @@ user.last_name as "Last Name",
 user.email as "Email",
 room.room_name as "Study Room",
 booking.booking_date as "Date",
-schedule.schedule_time as "Time"
+schedule.schedule_time as "Booking Start",
+schedule.schedule_time_end as "Booking End"
 
 from 
 user, booking, room, schedule
