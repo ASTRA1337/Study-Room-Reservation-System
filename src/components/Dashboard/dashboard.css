@@ -1,0 +1,80 @@
+.dashboard{
+    position: relative;
+    box-sizing: border-box;
+    width: 100vw;
+    
+    background-color: #cdd2db;
+    
+}
+.libCard{
+    width: 25%;
+    
+    margin-top: 25px;
+    margin-left: 15px;
+    text-align: center;
+    background-color: #e9ecf7;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 4px 16px;
+}
+
+.libCard:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.calendarCard{
+    position:absolute;
+    width: 50%;
+    margin-left: 45%;
+    text-align: center;
+    background-color: #e9ecf7;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+.calendarCard:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
+}
+
+.roomInfoCard{
+    width: 25%;
+    margin-top: 35px;
+    margin-left: 15px;
+    text-align: center;
+    background-color: #e9ecf7;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 4px 16px;
+
+}
+.roomInfoCard:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.bookingInfoCard{
+    width: 25%;
+    margin-top: 35px;
+    margin-left: 15px;
+    text-align: center;
+    background-color: #e9ecf7;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 4px 16px;
+}
+.bookingInfoCard:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
+}
+
+th,td{
+    padding-left: 38px;
+}
+h3,th{
+    font-weight: bolder;
+    font-family: cursive;
+    color: #2b3b6a;
+}
+
+
+
+

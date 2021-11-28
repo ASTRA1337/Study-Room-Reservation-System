@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import LoginForm from './LoginForm';
 import ky from 'ky-universal';
 
-function RegForm({Register,error}) {
+function RegForm({Register,error, toggleLogin}) {
     const [details, setDetails] = useState({fname:"", lname:"",email:"",password:""});
     const submitHandler = r => {
         r.preventDefault();
@@ -31,7 +31,7 @@ function RegForm({Register,error}) {
                     <input type="text" name="password" id="password" onChange={r => setDetails({...details,password: r.target.value})} value = {details.password} />
                 </div>
                 <input type="submit" value="Create Account"></input>
-                <input type="submit" value="Cancel"></input>
+                <input type="submit" value="Cancel" onClick={(e) => {e.preventDefault(); toggleLogin();}}></input>
 
             </div>
         </form>
