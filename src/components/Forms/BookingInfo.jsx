@@ -26,12 +26,12 @@ function BookingInfo() {
         <div className = "bookingInfo">
             <button onClick = "displayRoom()" className = "dropbtn">Select Room</button>
             <div id = "dropMenu" className = "drop-content">
-                <a href = "#">Room Number</a>
-                <a href = "#">Room Number</a>
-                <a href = "#">Room Number</a>
-                <a href = "#">Room Number</a>
-                <a href = "#">Room Number</a>
-                <a href = "#">Room Number</a>
+                <a href = "#">N430</a>
+                <a href = "#">N443</a>
+                <a href = "#">N445</a>
+                <a href = "#">N447</a>
+                <a href = "#">N449</a>
+                <a href = "#">N453</a>
 
             </div>
             

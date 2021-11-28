@@ -1,12 +1,17 @@
 /* Dropdown Button CSS */
 .dropbtn{
-    background-color: #3498DB;
+   background-image: linear-gradient(to right, #2b3b6a 50%,#2b3b6a 50%,#a62540);
+   background-size: 200%;
+   background-position: 0%;
+   transition: 0.4s;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
 }
+
+.dropbtn:hover{background-position: 100% 0%;}
 
 /* Dropdown button hover and focus CSS */
 
