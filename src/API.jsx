@@ -16,6 +16,9 @@ async function authenticate(user){
             {json: user}
         ).json();
         console.log(res);
+        if (res.authenticated == false) {
+            throw new Error(res.error);
+        }
         return {authenticated: res.authenticated, error: res.error ,userData: res.user};
     } catch (error) {
         return {authenticated: false, error: error};
