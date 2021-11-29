@@ -4,6 +4,9 @@ import Calendar from '../Calendar/Calendar';
 import BookingInfo from '../Forms/BookingInfo';
 import "./dashboard.css";
 
+//trigger a change in the selected room which will then trigger a change in calendar
+//which will then display the availabe time of the current room at the selected date
+
 function Dashboard() {
     return (
         <div className = "dashboard">
