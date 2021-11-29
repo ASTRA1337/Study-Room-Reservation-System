@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './BookingInfo.css';
 
-function BookingInfo() {
+function BookingInfo({updateRoom}) {
     /* This function will show the room list for selection by user once button is clicked */
     const [room, setRoom] = useState("Select Room");
     function displayRoom(){
@@ -9,8 +9,10 @@ function BookingInfo() {
         document.getElementById("dropMenu").classList.toggle("show");
     }
     function selectRoom(roomNumber) {
+        updateRoom(roomNumber);
         setRoom(roomNumber);
         displayRoom();
+        
     }
 
     //This will close out the menu if the user clicks outside of it

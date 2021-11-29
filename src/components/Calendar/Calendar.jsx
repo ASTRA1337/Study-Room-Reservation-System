@@ -56,8 +56,9 @@ function renderTime(time)
     return renderTimeNumber(time.hour) + ":" + renderTimeNumber(time.minute) + time.status;
 }
 
-function renderAvailableTime()
+function renderAvailableTime(dateStatus)
 {
+    console.log("my date", dateStatus);
     const startHour = 7;
     const startMin = 0;
     const endTime = {"hour": 6, "minute": 0, "status": TimeStatus.PM};
@@ -67,26 +68,50 @@ function renderAvailableTime()
     var elements = [];
     while (currentTime.hour != endTime.hour || currentTime.minute != endTime.minute ) {
         var nextTime = getTimeBlock(currentTime, minuteStep);
-        var status = "Available";
+        var timeId = renderTime(currentTime)+renderTime(nextTime);
+        
+        var blockStatus = "Available";
+        var rowStyle = "";
+        if (dateStatus && dateStatus[timeId]) {
+            blockStatus = dateStatus[timeId];
+            rowStyle = "reserved-time";
+        }
+
         elements.push(
-            <tr>
+            <tr class={rowStyle}>
             <td>{renderTime(currentTime)} - {renderTime(nextTime)}</td>
-            <td>{status}</td>
+            <td>{blockStatus}</td>
             </tr>
         )
         currentTime = nextTime;
     }
     return elements;
 }
+
+
+
 function Calendar({room}) {
+    // const room = {
+    //     "Sat Jan 01 2022": {
+    //         "07:00am07:30am": "reserved"
+    //     },
+    //     "Sun Nov 28 2021": {
+    //         "07:00am07:30am": "reserved"
+    //     }
+    // }
+    
     const [date, setDate] = useState(new Date());
+    if (!room)
+        return (<div></div>);
     return (
         <div className = "calendar">
             <div className = "calWrapper">
                 <ReactCalendar onChange={setDate} value={date} />
             </div>
             <div>
-                The selected Date
+                <p>{date.toDateString()}</p>
+                <p>{date.toString()}</p>
+                <p>{date.toLocaleTimeString()}</p>
                 <table>
                     <thead>
                     <tr>
@@ -95,7 +120,7 @@ function Calendar({room}) {
                     </tr>
                     </thead>
                     <tbody>
-                    {renderAvailableTime()}
+                    {renderAvailableTime(room[date.toDateString()])}
                     </tbody>
                 </table>
             </div>
