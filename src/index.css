@@ -1,6 +1,4 @@
 *{
-    padding: 0;
-    margin: 0;
     box-sizing: border-box;
     font-family: monterrat,sans-serif;
 }
@@ -15,8 +13,6 @@ input,button{
 .App{
     height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #cdd2db;
 }
 
@@ -129,19 +125,4 @@ form .form-inner  input[type="submit"]:hover, .welcome button:hover{
     font-weight: 700;
 }
 
-.hello{
-    width: 100%;
-    max-width: 480px;
-    background-color: #e9ecf7;
-    padding: 15px 30px;
-
-}
-
-.hello h2{
-    color: #2b3b6a;
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 30px;
-
-}
 
