@@ -25,6 +25,7 @@ async function authenticate(user){
     };
 };
 
+// {"created": true, "user_id": user_id}
 async function createUser(user){
     const createUserUrl = makeURL(apiServer, CREATE_USER_API);
     console.log("running createUser");
@@ -33,9 +34,13 @@ async function createUser(user){
             {json: user}
         ).json();
         console.log(res);
-        return {authenticated: res.authenticated, error: res.error ,userData: res.user};
+        if (res.created == false) {
+            throw new Error(res.error);
+        }
+        
+        return {created: res.created, userId: res.user_id};
     } catch (error) {
-        return {authenticated: false, error: error};
+        return {created: false, error: error};
     };
 };
 export {authenticate, createUser};
