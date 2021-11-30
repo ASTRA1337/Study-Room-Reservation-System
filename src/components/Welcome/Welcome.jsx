@@ -7,12 +7,11 @@ import { SystemUpdateTwoTone } from "@mui/icons-material";
 
 
 
-function Welcome({Login, error, Register, clearError}) {
+function Welcome({Login, error}) {
     
     const ids = ["wLogin","wRegister"];
     const HIDE_CONTENT = "hideContent"
     const toggle = () => {
-        clearError("");
         for (var id of ids) {
             console.log(id);
             var element = document.getElementById(id);
@@ -29,7 +28,7 @@ function Welcome({Login, error, Register, clearError}) {
     return (
         <div className = "welcomepage">
          <div id="wLogin" className = "secTwo"><LoginForm  Login={Login} error={error} toggleRegister={toggle}/></div>
-         <div id="wRegister" className = "secThree hideContent"><RegForm Register={Register} error={error} toggleLogin={toggle}/></div>
+         <div id="wRegister" className = "secThree hideContent"><RegForm toggleLogin={toggle}/></div>
         </div>
     )
 }

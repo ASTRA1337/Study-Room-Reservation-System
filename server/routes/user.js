@@ -9,7 +9,7 @@ router.post("/user/schedule", (req, res) => {
 });
 router.post("/user/create", (req,res) => {
     console.log("Creating user", req)
-    const {first_name,last_name, email, uhd_id,username,password} = req.query;
+    const {first_name,last_name, email, uhd_id,username,password} = req.body;
     const queryString = `INSERT INTO ${USER_TABLE} (first_name,last_name,email, uhd_id,username,password) 
     VALUES("${first_name}","${last_name}", "${email}", "${uhd_id}", "${username}", "${password}");`;
     connection.query(queryString, (err, rows, fields) => {

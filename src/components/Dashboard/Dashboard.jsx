@@ -1,19 +1,37 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Topbar from '../Topbar/Topbar';
 import Calendar from '../Calendar/Calendar';
 import BookingInfo from '../Forms/BookingInfo';
 import "./dashboard.css";
+import { red } from '@mui/material/colors';
+import { fontSize } from '@mui/system';
 
 //trigger a change in the selected room which will then trigger a change in calendar
 //which will then display the availabe time of the current room at the selected date
 
 function Dashboard() {
+    const [selectedRoom, setSelectedRoom] = useState("");
+    const roomData = {
+        "N430": {
+            "Sat Jan 01 2022": {
+                "07:00am07:30am": "reserved"
+            },
+            "Sun Nov 28 2021": {
+                "07:00am07:30am": "reserved"
+            }
+        },
+        "N443": {},
+    }
+    const updateRoom = (room) => {
+        setSelectedRoom(room);
+    }
     return (
         <div className = "dashboard">
             <div className = "topbar"><Topbar /></div>
             <div className = "libCard">
             <div className = "calendarCard">
-                <div className = "calInfo"><Calendar /></div>
+                <span style={{color: "red", fontSize: "20px"}}>{selectedRoom}</span>
+                <div className = "calInfo"><Calendar room={roomData[selectedRoom]}/></div>
             </div>
                 <div className = "libHours">
                     <h3>Library Hours</h3>
@@ -67,7 +85,7 @@ function Dashboard() {
             <div className = "bookingInfoCard">
                 <div className = "bookingInfo">
                     <h3>Booking Information</h3>
-                    <BookingInfo />
+                    <BookingInfo updateRoom={(room) => updateRoom(room)}/>
                 </div>
             </div>
         </div>
