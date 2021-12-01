@@ -19,4 +19,51 @@
     display: none;
 }
 
+.parent-top {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 25% 1fr 25%;
+  }
+  
+  .row-center {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    place-items: center;
+    text-align: center;
+  }
+  .parent-top .item1 {
+    width: 50%;
+    justify-self: start;
+  }
+  .parent-top .item2 {
+    justify-self: center;
+  }
+  .parent-top .item3 {
+    width: 50%;
+    justify-self: end;
+    /* text-align: center; */
+  }
+
+  body {
+    background-color: rgb(24, 133, 200);
+  }
+  .parent-mid {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    
+  }
+  .parent-mid .item1 {
+    width: 50%;
+    justify-self: center;
+  }
+  .parent-mid .item2 {
+      grid-template-rows: repeat(auto,3);
+      justify-self: center;
+  }
+  .parent-mid .item3 {
+    width: 50%;
+    justify-self: center;
+  }
+
 

@@ -77,7 +77,7 @@ function App() {
   // }
   
 return(
-  <Dashboard />
+  <Welcome Login={Login} error={""} />
 )
 }
 
