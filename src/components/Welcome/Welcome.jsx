@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import "./welcome.css";
 import LoginForm from '../Forms/LoginForm';
 import RegForm from '../Forms/RegForm';
@@ -26,10 +26,25 @@ function Welcome({Login, error}) {
         }
     }
     return (
-        <div className = "welcomepage">
-         <div id="wLogin" className = "secTwo"><LoginForm  Login={Login} error={error} toggleRegister={toggle}/></div>
-         <div id="wRegister" className = "secThree hideContent"><RegForm toggleLogin={toggle}/></div>
-        </div>
+        <Fragment>
+            <div className="parent-top">
+                <img className="item1" src= "/images/UHD logo.png" />
+                <div className="item2">
+                <h1>Welcome to UHD Study Room Reservation Website!</h1>
+                </div>
+                <img className = "item3" src = "/images/UHD Gator.png"/>  
+            </div>
+            <div className="parent-mid">
+                <img className="item1" src="/images/studyroom.jpg" />
+                <div className = "item2">
+                    <div id="wLogin" className = "secTwo"><LoginForm  Login={Login} error={error} toggleRegister={toggle}/></div>
+                    <div id="wRegister" className = "secThree hideContent"><RegForm toggleLogin={toggle}/></div>
+                </div>
+                <img className="item3" src="/images/Business Study Room.jpg" />
+            </div>
+       
+        </Fragment>
+      
     )
 }
 
