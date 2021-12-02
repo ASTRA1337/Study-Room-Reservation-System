@@ -10,6 +10,7 @@ import Calendar from './components/Calendar/Calendar';
 import {useQuery, useMutation} from 'react-query';
 import { LocalConvenienceStoreOutlined } from '@mui/icons-material';
 
+import Reservation from './components/Reservation';
 
 function App() {
 
@@ -77,7 +78,7 @@ function App() {
   // }
   
 return(
-  <Welcome Login={Login} error={""} />
+  <Reservation />
 )
 }
 
