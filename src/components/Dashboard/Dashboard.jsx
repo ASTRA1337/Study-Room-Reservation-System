@@ -25,6 +25,25 @@ function Dashboard() {
     const updateRoom = (room) => {
         setSelectedRoom(room);
     }
+    const schedules =[
+        {weekdate:"Sunday", start: "1:00PM", end: "6:00PM"},
+        {weekdate:"Monday", start: "1:00PM", end: "6:00PM"},
+        {weekdate:"Tuesday", start: "1:00PM", end: "6:00PM"},
+       { weekdate:"Wednesday", start: "1:00PM", end: "6:00PM"},
+       { weekdate:"Thursday", start: "1:00PM", end: "6:00PM"},
+       { weekdate:"Friday", start: "1:00PM", end: "6:00PM"},
+      { weekdate:"Saturday", start: "1:00PM", end: "6:00PM"}
+    ];
+    const renderSchedules = (schedules) => {
+        return schedules.map((time) => {
+            return (
+                <tr key={time.weekdate}>
+                    <td>{time.weekdate}</td>
+                    <td>{time.start} - {time.end}</td>
+                </tr>
+            )
+        })
+    } 
     return (
         <div className = "dashboard">
             <div className = "topbar"><Topbar /></div>
@@ -36,38 +55,15 @@ function Dashboard() {
                 <div className = "libHours">
                     <h3>Library Hours</h3>
                     <table className = "hoursTable">
-                        <tr>
-                            <th>Days</th>
-                            <th>Hours</th>
-                        </tr>
-                        <tr>
-                            <td>Monday</td>
-                            <td>7:00 AM - 10:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Tuesday</td>
-                            <td>7:00 AM - 10:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Wednesday</td>
-                            <td>7:00 AM - 10:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Thursday</td>
-                            <td>7:00 AM - 10:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Friday</td>
-                            <td>7:00 AM - 6:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Saturday</td>
-                            <td>9:00 AM - 6:00 PM</td>
-                        </tr>
-                        <tr>
-                            <td>Sunday</td>
-                            <td>1:00 PM - 6:00 PM</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Days</th>
+                                <th>Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {renderSchedules(schedules)}
+                        </tbody>
                     </table>
                 </div>
             </div>
