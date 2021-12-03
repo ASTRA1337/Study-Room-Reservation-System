@@ -25,17 +25,17 @@ function Dashboard() {
     const updateRoom = (room) => {
         setSelectedRoom(room);
     }
-    const schedules =[
+    const schedule =[
         {weekdate:"Sunday", start: "1:00PM", end: "6:00PM"},
-        {weekdate:"Monday", start: "1:00PM", end: "6:00PM"},
-        {weekdate:"Tuesday", start: "1:00PM", end: "6:00PM"},
-       { weekdate:"Wednesday", start: "1:00PM", end: "6:00PM"},
-       { weekdate:"Thursday", start: "1:00PM", end: "6:00PM"},
-       { weekdate:"Friday", start: "1:00PM", end: "6:00PM"},
-      { weekdate:"Saturday", start: "1:00PM", end: "6:00PM"}
+        {weekdate:"Monday", start: "7:00AM", end: "10:00PM"},
+        {weekdate:"Tuesday", start: "7:00AM", end: "10:00PM"},
+       { weekdate:"Wednesday", start: "7:00AM", end: "10:00PM"},
+       { weekdate:"Thursday", start: "7:00AM", end: "10:00PM"},
+       { weekdate:"Friday", start: "7:00AM", end: "6:00PM"},
+      { weekdate:"Saturday", start: "9:00AM", end: "6:00PM"}
     ];
-    const renderSchedules = (schedules) => {
-        return schedules.map((time) => {
+    const renderSchedule = (schedule) => {
+        return schedule.map((time) => {
             return (
                 <tr key={time.weekdate}>
                     <td>{time.weekdate}</td>
@@ -50,7 +50,7 @@ function Dashboard() {
             <div className = "libCard">
             <div className = "calendarCard">
                 <span style={{color: "red", fontSize: "20px"}}>{selectedRoom}</span>
-                <div className = "calInfo"><Calendar room={roomData[selectedRoom]}/></div>
+                <div className = "calInfo"><Calendar room={roomData[selectedRoom]} schedule={schedule}/></div>
             </div>
                 <div className = "libHours">
                     <h3>Library Hours</h3>
@@ -62,7 +62,7 @@ function Dashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {renderSchedules(schedules)}
+                            {renderSchedule(schedule)}
                         </tbody>
                     </table>
                 </div>

@@ -1,6 +1,4 @@
-.reserved-time {
-    background-color: red;
-  }
+
 
   .time-block{
     display: block;
@@ -19,5 +17,14 @@
 
   .time-selected {
     color: #e6e6e6;
-    background-color: #a62540;
+    background-color: #3859bd;
+  }
+  .reserved-time {
+    display: block;
+    margin: 20px;
+    background-color: #d33658;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #e6e6e6;
+    font-weight: 700;
   }

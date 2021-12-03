@@ -116,4 +116,23 @@
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
   }
+
+  .reserve-button{
+    display: inline-block;
+    margin-right: 30px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #2b3b6a 50%,#2b3b6a 50%,#a62540);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #e9ecf7;
+    font-weight: 700;
+    cursor: pointer;
+
+}
+
+.reserve-button:hover{
+    background-position: 100% 0%;
+}
   

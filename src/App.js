@@ -10,8 +10,6 @@ import Calendar from './components/Calendar/Calendar';
 import {useQuery, useMutation} from 'react-query';
 import { LocalConvenienceStoreOutlined } from '@mui/icons-material';
 
-import Reservation from './components/Reservation';
-
 function App() {
 
   const adminUser = {
@@ -78,7 +76,7 @@ function App() {
   // }
   
 return(
-  <Reservation />
+  <Dashboard />
 )
 }
 
