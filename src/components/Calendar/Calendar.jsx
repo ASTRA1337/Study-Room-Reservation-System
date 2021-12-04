@@ -97,6 +97,7 @@ function Calendar({roomData, schedule, updateRoom}) {
 
     const renderAvailableTime = (dateStatus, today) =>
     {
+        //Helper
         const process_date = (data) => {
             if (data === undefined)
                 return {};
@@ -120,12 +121,10 @@ function Calendar({roomData, schedule, updateRoom}) {
 
                 var id = start.replace(":00","") + "-" + end.replace(":00","");
                 console.log(id);
-                reserved_blocks[id] = true;
+                reserved_blocks[id] = t.user_id;
             }
             return reserved_blocks;
         }
-        const reserved_blocks = process_date(dateStatus);
-        
         const extractTime = (timeString) => {
             var time = timeString.replace(/[AM|PM|am|pm|\s]/g,"");
             time = time.split(":");
@@ -138,6 +137,10 @@ function Calendar({roomData, schedule, updateRoom}) {
             return t1.hour === t2.hour && t1.minute === t2.minute && 
                 t1.status.toLowerCase() === t2.status.toLowerCase();
         }
+        //End Helper
+        const reserved_blocks = process_date(dateStatus);
+        
+        
         var currentTime = extractTime(today.start);
         const endTime = extractTime(today.end);
         const minuteStep = 30;
@@ -150,6 +153,9 @@ function Calendar({roomData, schedule, updateRoom}) {
             var blockStatus = "Available";
             if (reserved_blocks && reserved_blocks[timeBlock]) {
                 blockStatus = "Reserved";
+                if (reserved_blocks[timeBlock] === roomData.user_id) {
+                    blockStatus = "RESERVED FOR ME";
+                }
             }
             times.push({timeBlock, blockStatus});
             currentTime = nextTime;

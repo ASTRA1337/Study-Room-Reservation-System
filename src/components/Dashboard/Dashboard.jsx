@@ -12,7 +12,8 @@ import {getRoomReservation} from '../../API';
 //trigger a change in the selected room which will then trigger a change in calendar
 //which will then display the availabe time of the current room at the selected date
 
-function Dashboard() {
+function Dashboard( {user}) {
+   
     const [selectedRoom, setSelectedRoom] = useState({roomName: "", roomId: ""});
     // const roomData = {
     //     "N430": {
@@ -57,18 +58,29 @@ function Dashboard() {
             )
         })
     }
-    var roomData = {room_id: selectedRoom.roomId, user_id: 1, reservations: {}};
+    console.log("user data" ,user);
+    if (user === undefined || user.user_id === undefined) {
+        return (
+            <div>
+                <p>You are not allowed to be here!</p>
+            </div>
+        )
+    }
+
+    var roomData = {room_id: selectedRoom.roomId, user_id: user.user_id, reservations: {}};
     if (mutation.data && mutation.data.reservations)
         roomData.reservations = mutation.data.reservations[selectedRoom.roomId]
     console.log("my room data", roomData);
+    
     return (
         <div className = "dashboard">
-            <div className = "topbar"><Topbar /></div>
+            <div className = "topbar"><Topbar user={user}/></div>
             <div className = "libCard">
-            <div className = "calendarCard">
+                {selectedRoom.roomName && <div className = "calendarCard">
                 <span style={{color: "red", fontSize: "20px"}}>{selectedRoom.roomName}</span>
                 <div className = "calInfo"><Calendar roomData={roomData} schedule={schedule} updateRoom={()=>mutation.mutate(selectedRoom.roomId)}/></div>
-            </div>
+            </div>}
+            
                 <div className = "libHours">
                     <h3>Library Hours</h3>
                     <table className = "hoursTable">

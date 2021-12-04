@@ -46,38 +46,39 @@ function App() {
 
   //Login session
 
-  // if (mutation.data && mutation.data.userData) { //Login user
-  //   const user = mutation.data.userData;
-  //   return (
-  //     <Fragment>
-  //       <Topbar />
-  //     <div className="App">
+  if (mutation.data && mutation.data.userData) { //Login user
+    const user = mutation.data.userData;
+    return (
+      <Dashboard user={user} />
+      // <Fragment>
+      //   <Topbar />
+      // <div className="App">
      
-  //       <div className="welcome">
-  //         <h2>
-  //           Welcome, <span>{user.first_name}</span>  
-  //         </h2>
-  //         <button onClick={Logout}>Logout</button>
-  //       </div>
-  //     </div>
-  //     </Fragment>
-  //   );
-  // } else { // Non-login user
-  //   var error = "";
-  //   if (mutation.data && mutation.data.error) {
-  //     error = mutation.data.error.message;
-  //   }
-  //   return (
-  //     <Fragment>
-  //       <div></div>
-  //       <Welcome Login={Login} error={error}/>
-  //     </Fragment>
-  //   )
-  // }
+      //   <div className="welcome">
+      //     <h2>
+      //       Welcome, <span>{user.first_name}</span>  
+      //     </h2>
+      //     <button onClick={Logout}>Logout</button>
+      //   </div>
+      // </div>
+      // </Fragment>
+    );
+  } else { // Non-login user
+    var error = "";
+    if (mutation.data && mutation.data.error) {
+      error = mutation.data.error.message;
+    }
+    return (
+      <Fragment>
+        <div></div>
+        <Welcome Login={Login} error={error}/>
+      </Fragment>
+    )
+  }
   
-return(
-  <Dashboard />
-)
+// return(
+//   <Dashboard />
+// )
 }
 
 export default App;
