@@ -1,10 +1,5 @@
 const router = require("express").Router();
 
-//DUMMY DATABASE
-const data = [
-    {"email": "admin", "password": "admin"},
-    {"email": "tom", "password": "tom"}
-];
 const USER_TABLE = "user";
 
 router.post("/authenticate", (req, res) => {
