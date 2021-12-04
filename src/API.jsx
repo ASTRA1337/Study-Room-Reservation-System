@@ -5,6 +5,7 @@ const apiServer = "http://localhost:3003";
 const LOGIN_API = "authenticate";
 const CREATE_USER_API = "user/create";
 const RESERVATION_API = "user/schedule";
+const ROOM_RESERVATION = "room/reservation";
 function makeURL(host, api) {
     return host + "/" + api;
 }
@@ -64,5 +65,54 @@ async function makeReservation(reservation){
     };
 };
 
-export {authenticate, createUser, makeReservation};
+//Response data if success {"status": true, "reservations": {room_id: {date: [{timeblocks}]}}}
+function process(room_id, reservations) {
+    //room_id, date
+    // {
+    //     room_id: {
+    //         date: [{start: end: user_id}]
+    //     }
+    // }
+    var res = {};
+    for (var booking of reservations) {        
+        var {user_id,start,end} = booking;
+        if (res[room_id] === undefined) {
+            res[room_id] = {};
+        }
+        var startDate = new Date(start);
+        var endDate = new Date(end);
+        if (startDate === undefined || endDate === undefined) {
+            console.log(start, end);
+            continue;
+        }
+        var month = startDate.getMonth() + 1;
+        var date = startDate.getFullYear() + "/" + month + "/" + startDate.getDate();
+        if (res[room_id][date] === undefined) {
+            res[room_id][date] = [];
+        }
+        var start_time = startDate.toLocaleTimeString();
+        var end_time = endDate.toLocaleTimeString(); 
+        res[room_id][date].push ({user_id: user_id, start: start_time, end: end_time});
+    }
+    return res;
+}
+
+async function getRoomReservation(room_id){
+    const reservationUrl = makeURL(apiServer, ROOM_RESERVATION) + "/" + room_id;
+    console.log("running getRoomReservation");
+    try {
+        const res = await ky.get(reservationUrl).json();
+        console.log("received room reservation",res);
+        if (res.status == false) {
+            throw new Error(res.error);
+        }
+        var reservations = process(room_id, res.reservations[room_id]);
+        return {status: res.status,  reservations: reservations};
+    } catch (error) {
+        return {status: false, error: error};
+    };
+};
+
+
+export {authenticate, createUser, makeReservation, getRoomReservation};
 

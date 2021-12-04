@@ -44,7 +44,7 @@ function renderTime(time)
         }
         return s;
     }
-    return renderTimeNumber(time.hour) + ":" + renderTimeNumber(time.minute) + time.status;
+    return renderTimeNumber(time.hour) + ":" + renderTimeNumber(time.minute) + " " +time.status;
 }
 
 function convertTo24HourFormat(time) {
@@ -57,41 +57,16 @@ function convertTo24HourFormat(time) {
 
     return hour + ":" + tmp[1];
 }
-/*
-Time message from server
-{
-            "booking_id": 10,
-            "user_id": 1,
-            "room_id": 2,
-            "start": "2021-12-02T16:00:00.000Z",
-            "schedule_id": null,
-            "end": "2021-12-02T16:30:00.000Z"
-}
-
-*/
 
 
-//TimeBlock
-
-
-function Calendar({room, schedule}) {
-    // const room = {
-    //     "Sat Jan 01 2022": {
-    //         "07:00am07:30am": "reserved"
-    //     },
-    //     "Sun Nov 28 2021": {
-    //         "07:00am07:30am": "reserved"
-    //     }
-    // }
-    
+function Calendar({roomData, schedule, updateRoom}) {
     //Helpers
     const getSQLDate = (date) => {
-        return date.getFullYear() + "/" +date.getMonth()+"/"+date.getDate();
+        var month = date.getMonth() + 1;
+        return date.getFullYear() + "/" +month +"/"+date.getDate();
     }
     //
-    var [reservations, setReservations] = useState({user_id: 1, room_id: 1, date: ""});
-    var times = {};
-    var [dateStatus, setDateStatus] = useState({});
+    var [reservations, setReservations] = useState({user_id: 1, room_id: 1, date: "", times: {}});
     const [date, setDate] = useState(new Date());
 
     //send reservation request to server
@@ -99,20 +74,7 @@ function Calendar({room, schedule}) {
         onSuccess: (data) => {
             if (data.created) {
                 console.log("Reservation success", data);
-                var reserved = {};
-                for (var timeString in times) {
-                    if (times[timeString])
-                        reserved[timeString] = true;
-                }
-                console.log("new status", {...dateStatus, ...reserved});
-                var d = getSQLDate(date);
-                setDateStatus({
-                    ...dateStatus,
-                    [d]: {
-                        ...dateStatus[d],
-                        ...reserved
-                    }
-                });
+                updateRoom();
             } else {
                 console.log("Reservation failed", data);
             }
@@ -121,18 +83,49 @@ function Calendar({room, schedule}) {
 
     //update selected or deselected time block
     const updateReservations = (newReservation) => {
-        times ={
+        console.log("new reservation", newReservation);
+        var times = reservations.times;
+        times = {
             ...times,
             [newReservation]: times[newReservation] === undefined? true : !times[newReservation]
         }
-        // setReservations({
-        //     ...reservations,
-        //     times: times
-        // });
+        setReservations({
+            ...reservations,
+            times: times
+        });
     }
 
     const renderAvailableTime = (dateStatus, today) =>
     {
+        const process_date = (data) => {
+            if (data === undefined)
+                return {};
+            var reserved_blocks = {};
+            console.log("data flow", data);
+            const processTime = (t) =>
+            {   
+                if (t === undefined) {
+                    return "";
+                }
+                var s = t.split(":");
+                var hour = s[0]
+                if (hour.length == 1) {
+                    hour = "0"+hour;
+                }
+                return hour + ":" + s[1]+ ":" +s[2];
+            }
+            for (var t of data) {
+                var start = processTime(t.start);
+                var end = processTime(t.end);
+
+                var id = start.replace(":00","") + "-" + end.replace(":00","");
+                console.log(id);
+                reserved_blocks[id] = true;
+            }
+            return reserved_blocks;
+        }
+        const reserved_blocks = process_date(dateStatus);
+        
         const extractTime = (timeString) => {
             var time = timeString.replace(/[AM|PM|am|pm|\s]/g,"");
             time = time.split(":");
@@ -153,8 +146,9 @@ function Calendar({room, schedule}) {
         while (! isEqualTime(currentTime, endTime)) {
             var nextTime = getTimeBlock(currentTime, minuteStep);
             var timeBlock = renderTime(currentTime) + "-" + renderTime(nextTime);
+            console.log("timeBLock", timeBlock, timeBlock);
             var blockStatus = "Available";
-            if (dateStatus && dateStatus[timeBlock]) {
+            if (reserved_blocks && reserved_blocks[timeBlock]) {
                 blockStatus = "Reserved";
             }
             times.push({timeBlock, blockStatus});
@@ -171,21 +165,21 @@ function Calendar({room, schedule}) {
     }
 
 
-    const reserve = (times) => {
-        console.log("reserve times", times);
+    const reserve = (reservations) => {
         var reserve_times = []
-        for (var timeString in times) {
-            if (times[timeString])
+        for (var timeString in reservations.times) {
+            if (reservations.times[timeString])
                 reserve_times.push(timeString);
         }
         if (reserve_times.length === 0) {
             console.log("No time selected");
             return;
         }
-        console.log("reserve times", reserve_times);
+        console.log("reserving times", reserve_times);
         //const {user_id, room_id, date, times} = reservations;
         //times should be an array of object with format {start, end}
         var localDate = getSQLDate(date);
+        console.log("localDate", localDate, date.toDateString());
         const conformTimes = reserve_times.map((timeString) => {
             var t = timeString.split("-");
             var start = convertTo24HourFormat(t[0]);
@@ -194,16 +188,19 @@ function Calendar({room, schedule}) {
                     end: localDate + " " + end}
         });
         const data = {
-            user_id: 1,
-            room_id: 2,
+            user_id: roomData.user_id,
+            room_id: roomData.room_id,
             time_blocks:conformTimes,
         };
         mutation.mutate(data);
     }
 
-    if (!room)
-        return (<div></div>);
-    console.log("my date", date.getDate());
+    var date_reservations = [];
+    if (roomData && roomData.reservations) {
+        date_reservations = roomData.reservations[getSQLDate(date)];
+    }
+    console.log("room data- Calendar", roomData);
+    console.log("date reservations", date_reservations);
     return (
         <div className = "calendar">
             <div className = "calWrapper">
@@ -221,11 +218,11 @@ function Calendar({room, schedule}) {
                     </tr>
                     </thead>
                     <tbody>
-                    {renderAvailableTime(dateStatus[getSQLDate(date)], schedule[date.getDay()])}
+                    {renderAvailableTime(date_reservations, schedule[date.getDay()])}
                     </tbody>
                 </table>
             </div>
-            <button className="reserve-button" onClick={() => reserve(times) }>Reserve</button>
+            <button className="reserve-button" onClick={() => reserve(reservations) }>Reserve</button>
         </div>
     )
 }

@@ -6,17 +6,17 @@ function TimeBlock({timeBlock, blockStatus, reserve}) {
         e.preventDefault();
         var row = e.target;
         if (row && row.parentElement) {
-            var classList = row.parentElement.classList;
+            var parent = row.parentElement;
             if (row.tagName.toLowerCase() == "tr") {
-                classList = row.classList;
+                parent = row;
             }
+            var classList = parent.classList;
             if (classList.contains(toggleClass)) {
                 classList.remove(toggleClass);
             } else {
                 classList.add(toggleClass);    
             }
-            var timeValue = row.parentElement.firstElementChild.innerHTML;
-            console.log("time row", timeValue);
+            var timeValue = parent.firstElementChild.innerHTML;
             reserve(timeValue);
         }
     }
