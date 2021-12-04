@@ -1,0 +1,30 @@
+
+
+  .time-block{
+    display: block;
+    margin: 20px;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #2b3b6a;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .time-block:hover {
+    cursor: pointer;
+    background-position: 100% 0%;
+    background-color: #5f73af;
+  }
+
+  .time-selected {
+    color: #e6e6e6;
+    background-color: #3859bd;
+  }
+  .reserved-time {
+    display: block;
+    margin: 20px;
+    background-color: #d33658;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #e6e6e6;
+    font-weight: 700;
+  }

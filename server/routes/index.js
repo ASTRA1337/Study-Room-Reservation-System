@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const user = require("./user");
 const authenticate = require("./authenticate");
-router.use("", [user,authenticate]);
+const room = require("./room");
+router.use("", [user,authenticate,room]);
 
 router.get("/", (req, res) => {
     res.json({
