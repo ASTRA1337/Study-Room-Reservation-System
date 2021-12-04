@@ -12,7 +12,7 @@ import {getRoomReservation} from '../../API';
 //trigger a change in the selected room which will then trigger a change in calendar
 //which will then display the availabe time of the current room at the selected date
 
-function Dashboard( {user}) {
+function Dashboard( {user, logout}) {
    
     const [selectedRoom, setSelectedRoom] = useState({roomName: "", roomId: ""});
     // const roomData = {
@@ -74,7 +74,8 @@ function Dashboard( {user}) {
     
     return (
         <div className = "dashboard">
-            <div className = "topbar"><Topbar user={user}/></div>
+            <div className = "topbar"><Topbar user={user} logout={logout}/></div>
+            
             <div className = "libCard">
                 {selectedRoom.roomName && <div className = "calendarCard">
                 <span style={{color: "red", fontSize: "20px"}}>{selectedRoom.roomName}</span>

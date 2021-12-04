@@ -4,7 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import "./topbar.css";
 
-export default function Topbar({user}) {
+export default function Topbar({user, logout}) {
     return (
         <div className = "topbar">
 
@@ -14,6 +14,7 @@ export default function Topbar({user}) {
                 </div>
                 <div className = "topright">
                     <div>Hello {user.first_name}</div>
+                    <button onClick={logout} className="logout-button">Logout</button>
                     <div className = "topbarIconContainer">
                         <SettingsIcon />
 

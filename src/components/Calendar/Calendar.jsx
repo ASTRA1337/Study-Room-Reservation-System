@@ -74,6 +74,10 @@ function Calendar({roomData, schedule, updateRoom}) {
         onSuccess: (data) => {
             if (data.created) {
                 console.log("Reservation success", data);
+                setReservations({
+                    ...reservations,
+                    times: {}
+                });
                 updateRoom();
             } else {
                 console.log("Reservation failed", data);
